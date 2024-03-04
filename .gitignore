@@ -4,7 +4,7 @@
 # allow list
 !.gitignore
 
-!line_trace_lap_timer/
+!/line_trace_lap_timer
 
 # Mac special files
 */.DS_store
