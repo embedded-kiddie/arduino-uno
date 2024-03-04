@@ -45,7 +45,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
  *--------------------------------------------------*/
 // for lap timer
 volatile static bool start;
-volatile static char strLap[] ="00:00:00";
+volatile static char strLap[] = "00:00:00";
 volatile static u_int32_t timerT0, timerT1;
 
 // for lap blinking
