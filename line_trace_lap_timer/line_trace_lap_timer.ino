@@ -82,7 +82,7 @@ void setupSensor() {
 #if USE_INTERRUPT
   // Interrupt handler when the state of IR sensor changes
   void checkStateIR(void);
-  attachInterrupt(digitalPinToInterrupt(IR_SENSOR_PIN), checkStateIR, FALLING);
+  attachInterrupt(digitalPinToInterrupt(IR_SENSOR_PIN), checkStateIR, CHANGE);
 #endif
 }
 
