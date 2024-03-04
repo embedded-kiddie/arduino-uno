@@ -1,3 +1,23 @@
+# ignore all files and directories
+*
+*/
+
+# allow list
+!.gitignore
+
+!line_trace_lap_timer/
+
+# Mac special files
+*/.DS_store
+*/._*
+
+# Object files
+/Debug
+/Release
+
+######################
+# github defulat of C
+######################
 # Prerequisites
 *.d
 
@@ -50,3 +70,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
