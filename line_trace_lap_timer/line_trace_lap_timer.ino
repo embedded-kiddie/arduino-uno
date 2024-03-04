@@ -44,13 +44,13 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
  * Global variables to handle in interrup handler
  *--------------------------------------------------*/
 // for lap timer
-volatile bool start;
-volatile u_int32_t timerT0, timerT1;
-volatile char lapStr[10];
+volatile static bool start;
+volatile static u_int32_t timerT0, timerT1;
+volatile static char lapStr[10];
 
 // for lap blinking
-volatile int blinkCount;
-volatile uint32_t blinkT0;
+volatile static int blinkCount;
+volatile static uint32_t blinkT0;
 
 /*--------------------------------------------------
  * Setup OLED
@@ -119,11 +119,13 @@ char* time2str(uint32_t msec, char *str) {
  * State transition for start and lap
  *--------------------------------------------------*/
 void checkStateIR(void) {
+  uint32_t status = digitalRead(IR_SENSOR_PIN);
+
 #if DEBUG_PRINT
-  Serial.println(digitalRead(IR_SENSOR_PIN));
+  Serial.println(status);
 #endif
 
-  if (!digitalRead(IR_SENSOR_PIN)) {
+  if (!status) {
     if (start) {
       uint32_t delta = timerT1 - timerT0;
       if (delta >= LAP_HYSTERESIS) {
