@@ -55,7 +55,7 @@ volatile static uint32_t blinkT0;
 /*--------------------------------------------------
  * Setup OLED
  *--------------------------------------------------*/
-void setupOLED() {
+void setupDisplay() {
   // initialize the OLED object
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.begin(9600);
@@ -154,7 +154,7 @@ void checkStateIR(void) {
  *--------------------------------------------------*/
 void setup() {
   // OLED
-  setupOLED();
+  setupDisplay();
 
   // FC-51 infrared avoidance sensor
   setupSensor();
@@ -210,7 +210,7 @@ void loop() {
   display.display();
 
 #if DEBUG_PRINT
-  Serial.print(delta);
+  Serial.print(str);
   Serial.print("\t");
   Serial.print((char*)lapStr);
   Serial.println();
