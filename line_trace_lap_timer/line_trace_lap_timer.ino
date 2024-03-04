@@ -45,8 +45,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
  *--------------------------------------------------*/
 // for lap timer
 volatile static bool start;
+volatile static char strLap[] ="00:00:00";
 volatile static u_int32_t timerT0, timerT1;
-volatile static char lapStr[10];
 
 // for lap blinking
 volatile static int blinkCount;
@@ -93,7 +93,7 @@ void initTimer(void) {
   // for lap timer
   start = false;
   timerT0 = timerT1 = 0;
-  strcpy((char*)lapStr, "00:00:00");
+  strcpy((char*)strLap, "00:00:00");
 
   // for lap blinking
   blinkT0 = 0;
@@ -119,7 +119,7 @@ char* time2str(uint32_t msec, char *str) {
  * State transition for start and lap
  *--------------------------------------------------*/
 void checkStateIR(void) {
-  uint32_t status = digitalRead(IR_SENSOR_PIN);
+  bool status = digitalRead(IR_SENSOR_PIN);
 
 #if DEBUG_PRINT
   Serial.println(status);
@@ -129,7 +129,7 @@ void checkStateIR(void) {
     if (start) {
       uint32_t delta = timerT1 - timerT0;
       if (delta >= LAP_HYSTERESIS) {
-        time2str(delta, (char*)lapStr);
+        time2str(delta, (char*)strLap);
         timerT0 = timerT1;
 
         blinkT0 = timerT0;
@@ -172,7 +172,7 @@ void setup() {
  *--------------------------------------------------*/
 void loop() {
   // for timer
-  char str[10];
+  char strNow[10];
   uint32_t delta;
 
   timerT1 = millis();
@@ -190,7 +190,7 @@ void loop() {
 
   display.clearDisplay();
   display.setCursor(TIMER_CURSOR_X, TIMER_CURSOR_Y);
-  display.println(time2str(delta, str));
+  display.println(time2str(delta, strNow));
 
   // This is safe without conflict with interrupt because of hysteresis.
   if (blinkCount) {
@@ -204,15 +204,15 @@ void loop() {
 
   if (blinkCount % 2 == 0) {
     display.setCursor(TIMER_CURSOR_X, TIMER_CURSOR_Y + 32);
-    display.println((char*)lapStr);
+    display.println((char*)strLap);
   }
 
   display.display();
 
 #if DEBUG_PRINT
-  Serial.print(str);
+  Serial.print(strNow);
   Serial.print("\t");
-  Serial.print((char*)lapStr);
+  Serial.print((char*)strLap);
   Serial.println();
 #endif
 }
