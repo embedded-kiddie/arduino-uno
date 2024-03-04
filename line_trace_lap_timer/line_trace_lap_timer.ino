@@ -194,7 +194,7 @@ void loop() {
 
   // This is safe without conflict with interrupt because of hysteresis.
   if (blinkCount) {
-    if ((timerT1 - blinkT0) > BLINK_INTERVAL) {
+    if ((timerT1 - blinkT0) >= BLINK_INTERVAL) {
       blinkT0 = timerT1;
       if (blinkCount++ > (BLINK_COUNT * 2 - 1)) {
         blinkCount = 0;
