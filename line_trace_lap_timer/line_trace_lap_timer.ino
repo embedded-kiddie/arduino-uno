@@ -74,7 +74,7 @@ void setupDisplay() {
 }
 
 /*--------------------------------------------------
- * Setup timer
+ * Setup IR sensor
  *--------------------------------------------------*/
 void setupSensor() {
   pinMode(IR_SENSOR_PIN, INPUT);
@@ -150,7 +150,7 @@ void checkStateIR(void) {
 }
 
 /*--------------------------------------------------
- * Setup the OLED and IR sensor
+ * Setup the OLED, IR sensor and initialize timer
  *--------------------------------------------------*/
 void setup() {
   // OLED
