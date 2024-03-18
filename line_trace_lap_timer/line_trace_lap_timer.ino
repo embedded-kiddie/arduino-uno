@@ -37,7 +37,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
  * Definition for notification sound
  *--------------------------------------------------*/
 #define BUZZER_PIN      8     // Pin numbers for Sounder
-#define BUZZER_DURATION 16    // Note durations: 16 note
+#define BUZZER_DURATION 16    // Note durations [msec]
 #define BUZZER_FREQUENCY 2794 // NOTE_F7 [Hz]
 
 /*--------------------------------------------------
@@ -81,6 +81,7 @@ void setupSensor() {
 
 #if USE_INTERRUPT
   // Interrupt handler when the state of IR sensor changes
+  // Note: The behavior of FALLING seems to be the same as CHANGE
   void checkStateIR(void);
   attachInterrupt(digitalPinToInterrupt(IR_SENSOR_PIN), checkStateIR, CHANGE);
 #endif
@@ -89,7 +90,7 @@ void setupSensor() {
 /*--------------------------------------------------
  * Initialize timer
  *--------------------------------------------------*/
-void initTimer(void) {
+void resetTimer(void) {
   // for lap timer
   start = false;
   timerT0 = timerT1 = 0;
@@ -160,7 +161,7 @@ void setup() {
   setupSensor();
 
   // Initialize global variables
-  initTimer();
+  resetTimer();
 
 #if DEBUG_PRINT
   Serial.begin(9600);
