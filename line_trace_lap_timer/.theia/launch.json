@@ -3,6 +3,63 @@
   // Hover to view descriptions of existing attributes.
   "version": "0.2.0",
   "configurations": [
-    
+    {
+      "configId": "arduino:renesas_uno:minima",
+      "cwd": "${workspaceRoot}",
+      "request": "attach",
+      "type": "cortex-debug",
+      "executable": "/private/var/folders/12/mb_1z0bj731dzjd6j8h6t5zh0000gn/T/arduino/sketches/1BB3B7BE8D4852FCED906D22070D6D24/line_trace_lap_timer.ino.elf",
+      "toolchainPrefix": "arm-none-eabi",
+      "svdFile": "/Users/kiyo/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.1.0/svd/R7FA4M1AB.svd",
+      "overrideRestartCommands": [
+        "monitor reset halt",
+        "monitor gdb_sync",
+        "c"
+      ],
+      "postAttachCommands": [
+        "monitor reset halt",
+        "monitor gdb_breakpoint_override hard",
+        "monitor gdb_sync",
+        "c"
+      ],
+      "name": "Arduino UNO R4 Minima",
+      "serverpath": "/Users/kiyo/Library/Arduino15/packages/arduino/tools/openocd/0.11.0-arduino2/bin/openocd",
+      "servertype": "openocd",
+      "armToolchainPath": "/Users/kiyo/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/",
+      "configFiles": [
+        "interface/{programmer.protocol}.cfg",
+        "{programmer.transport_script}",
+        "/Users/kiyo/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.1.0/debugger/R7FA4M1AB.cfg"
+      ]
+    },
+    {
+      "configId": "arduino:renesas_uno:minima:programmer=cmsis-dap",
+      "cwd": "${workspaceRoot}",
+      "request": "attach",
+      "type": "cortex-debug",
+      "executable": "/private/var/folders/12/mb_1z0bj731dzjd6j8h6t5zh0000gn/T/arduino/sketches/1BB3B7BE8D4852FCED906D22070D6D24/line_trace_lap_timer.ino.elf",
+      "toolchainPrefix": "arm-none-eabi",
+      "svdFile": "/Users/kiyo/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.1.0/svd/R7FA4M1AB.svd",
+      "overrideRestartCommands": [
+        "monitor reset halt",
+        "monitor gdb_sync",
+        "c"
+      ],
+      "postAttachCommands": [
+        "monitor reset halt",
+        "monitor gdb_breakpoint_override hard",
+        "monitor gdb_sync",
+        "c"
+      ],
+      "name": "Arduino UNO R4 Minima (cmsis-dap)",
+      "serverpath": "/Users/kiyo/Library/Arduino15/packages/arduino/tools/openocd/0.11.0-arduino2/bin/openocd",
+      "servertype": "openocd",
+      "armToolchainPath": "/Users/kiyo/Library/Arduino15/packages/arduino/tools/arm-none-eabi-gcc/7-2017q4/bin/",
+      "configFiles": [
+        "interface/cmsis-dap.cfg",
+        "/Users/kiyo/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.1.0/debugger/select_swd.cfg",
+        "/Users/kiyo/Library/Arduino15/packages/arduino/hardware/renesas_uno/1.1.0/debugger/R7FA4M1AB.cfg"
+      ]
+    }
   ]
 }
